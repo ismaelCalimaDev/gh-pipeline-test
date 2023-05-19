@@ -19,6 +19,6 @@ Route::get('/', function () {
 Route::get('/', function () {
     return \App\Models\User::query()
         ->where('name', '!=', 'Federico')
-        ->where('email', '!=', 'fede@gmail.com'  )
+        ->where('email', '!=', 'fede@gmail.com')
         ->get();
 });
