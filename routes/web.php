@@ -16,9 +16,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/', function () {
-    return \App\Models\User::query()
-        ->where('name', '!=', 'Federico')
-        ->where('email', '!=', 'fede@gmail.com')
-        ->get();
-});
