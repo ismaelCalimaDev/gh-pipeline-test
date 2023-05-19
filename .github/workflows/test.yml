@@ -1,35 +1,34 @@
-name: Laravel Tests
+name: run-tests
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: push
 
 jobs:
-  laravel-tests:
-
+  build:
     runs-on: ubuntu-latest
-
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: test_db
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-
+      - name: Install dependencies
+        run: composer install -n --prefer-dist
       - name: Copy .env
         run: cp .env.example .env
-
-      - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Generate Application Key
+      - name: Generate key
         run: php artisan key:generate
-
-      - name: Run Database Migrations
-        run: php artisan migrate --force
-
-      - name: Execute Tests
-        run: vendor/bin/phpunit
+      - name: Run tests
+        env:
+          APP_URL: 'http://127.0.0.1:8000'
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+        run: |
+          php artisan serve > /dev/null 2>&1 &
+          php artisan test
