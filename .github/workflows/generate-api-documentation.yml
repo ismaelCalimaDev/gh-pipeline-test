@@ -27,12 +27,11 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Check if scribe.php exists
-        run: test -f config/scribex.php
-        continue-on-error: true
+        run: ls config > files.txt
 
       - name: Generate API documentation
         run: php artisan scribe:generate
-        if: ${{ success() }}
+        if: "contains(file('files.txt'), 'scribex.php')"
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
