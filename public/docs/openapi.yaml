@@ -29,6 +29,28 @@ paths:
       tags:
         - Endpoints
       security: []
+  /api/foo:
+    get:
+      summary: ''
+      operationId: getApiFoo
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  foo: bar
+                properties:
+                  foo:
+                    type: string
+                    example: bar
+      tags:
+        - Endpoints
+      security: []
 tags:
   -
     name: Endpoints
