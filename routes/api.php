@@ -18,14 +18,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/*Route::get('/foo', function () {
+Route::get('/foo', function () {
     return response()
         ->json([
             'foo' => 'bar',
         ]);
 });
 
-Route::get('/bar', function () {
+/*Route::get('/bar', function () {
     return response()
         ->json([
             'bar' => 'foo',
