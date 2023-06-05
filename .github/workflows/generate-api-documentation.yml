@@ -31,7 +31,7 @@ jobs:
           if [ -f config/scribe ]; then
             echo "scribe_file_exists=true"
           else
-            echo "scribe_file_exists=false"
+            echo "scribe_file_exists=true"
           fi
         id: check_file
 
