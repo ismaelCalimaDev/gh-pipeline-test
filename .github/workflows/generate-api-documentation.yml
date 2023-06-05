@@ -27,7 +27,7 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Check if scribe.php exists
-        run: test -f config/scribe.php
+        run: test -f config/scribex.php
         continue-on-error: true
 
       - name: Generate API documentation
