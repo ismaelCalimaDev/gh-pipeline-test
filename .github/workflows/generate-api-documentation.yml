@@ -1,0 +1,31 @@
+name: Pre-Push Action
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  pre-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+
+      - name: Generate API documentation
+        run: php artisan scribe:generate
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Generated API documentation" -a || echo "No changes to commit"
