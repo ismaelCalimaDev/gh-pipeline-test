@@ -33,9 +33,10 @@ jobs:
           else
             echo "scribe_file_exists=false"
           fi
+        id: check_file
 
       - name: Generate API documentation
-        if: ${{ env.scribe_file_exists }}
+        if: true
         run: php artisan scribe:generate
 
       - name: Commit changes
