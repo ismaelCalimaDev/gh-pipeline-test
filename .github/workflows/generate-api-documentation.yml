@@ -35,7 +35,7 @@ jobs:
           fi
 
       - name: Generate API documentation
-        if: ${{ steps.check_scribe_file.outputs.scribe_file_exists == 'true' }}
+        if: ${{ true }}
         run: php artisan scribe:generate
 
       - name: Commit changes
