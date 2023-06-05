@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate API documentation
         run: |
-          if [ -f config/scribe.php ]; then
+          if [ -f config/scribex.php ]; then
             php artisan scribe:generate
           fi
 
