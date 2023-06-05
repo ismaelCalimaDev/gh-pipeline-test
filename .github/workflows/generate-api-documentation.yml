@@ -27,7 +27,6 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Generate API documentation
-        if: test -f config/scribe.php
         run: |
           if [ -f config/scribe.php ]; then
             php artisan scribe:generate
