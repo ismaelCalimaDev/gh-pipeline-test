@@ -29,13 +29,13 @@ jobs:
       - name: Check if scribe.php exists
         run: |
           if [ -f config/scribe ]; then
-            echo "::set-output name=scribe_file_exists::true"
+            echo "scribe_file_exists=true"
           else
-            echo "::set-output name=scribe_file_exists::false"
+            echo "scribe_file_exists=false"
           fi
 
       - name: Generate API documentation
-        if: ${{ true }}
+        if: ${{ env.scribe_file_exists }}
         run: php artisan scribe:generate
 
       - name: Commit changes
