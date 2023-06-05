@@ -28,7 +28,10 @@ jobs:
 
       - name: Generate API documentation
         if: test -f config/scribe.php
-        run: php artisan scribe:generate
+        run: |
+          if [ -f config/scribe.php ]; then
+            php artisan scribe:generate
+          fi
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
