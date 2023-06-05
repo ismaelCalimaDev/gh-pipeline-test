@@ -26,17 +26,8 @@ jobs:
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Check if scribe.php exists
-        run: |
-          if [ -f config/scribe ]; then
-            echo "scribe_file_exists=true"
-          else
-            echo "scribe_file_exists=true"
-          fi
-        id: check_file
-
       - name: Generate API documentation
-        if: steps.check_file.outputs.scribe_file_exists == 'true'
+        if: 'test -f config/scribe.php'
         run: php artisan scribe:generate
 
       - name: Commit changes
