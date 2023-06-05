@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "0ae6bc2a-53e6-4236-8ac5-8e3739ec7da1",
+        "_postman_id": "bbbd1cc1-aae8-40b2-90c8-f947ef3beb0a",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -119,62 +119,6 @@
                             ],
                             "code": 200,
                             "body": "{\"foo\":\"bar\"}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "GET api\/bar",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/bar",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/bar"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "x-ratelimit-limit",
-                                    "value": "60"
-                                },
-                                {
-                                    "key": "x-ratelimit-remaining",
-                                    "value": "58"
-                                },
-                                {
-                                    "key": "access-control-allow-origin",
-                                    "value": "*"
-                                }
-                            ],
-                            "code": 200,
-                            "body": "{\"bar\":\"foo\"}",
                             "name": ""
                         }
                     ]
