@@ -3,7 +3,6 @@
 namespace App\Console;
 
 use App\Actions\ChangeFileWithGhComment;
-use App\Actions\GetOriginalFileFormatted;
 use App\Actions\GetOriginalFile;
 use App\Actions\SendRequestToOpenAi;
 use Illuminate\Console\Scheduling\Schedule;
@@ -16,6 +15,7 @@ class Kernel extends ConsoleKernel
         SendRequestToOpenAi::class,
         ChangeFileWithGhComment::class,
     ];
+
     /**
      * Define the application's command schedule.
      */

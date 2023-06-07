@@ -23,6 +23,6 @@ class ChangeFileWithGhComment
 
         $originalFileFormatted = GetOriginalFile::run($filePath, $lineNumber);
         $openAiResponseFormatted = SendRequestToOpenAi::run($originalFileFormatted, $commentContent);
-        ModifyFile::run($filePath,$openAiResponseFormatted);
+        ModifyFile::run($filePath, $openAiResponseFormatted);
     }
 }

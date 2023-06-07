@@ -10,6 +10,6 @@ class ModifyFile
 
     public function handle(string $filePath, $file)
     {
-        file_put_contents($filePath,implode('',$file));
+        file_put_contents($filePath, implode('', $file));
     }
 }
