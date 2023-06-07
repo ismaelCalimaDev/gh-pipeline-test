@@ -2,11 +2,20 @@
 
 namespace App\Console;
 
+use App\Actions\ChangeFileWithGhComment;
+use App\Actions\GetOriginalFileFormatted;
+use App\Actions\GetOriginalFile;
+use App\Actions\SendRequestToOpenAi;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        GetOriginalFile::class,
+        SendRequestToOpenAi::class,
+        ChangeFileWithGhComment::class,
+    ];
     /**
      * Define the application's command schedule.
      */

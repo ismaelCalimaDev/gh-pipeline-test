@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\GetOriginalFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +26,10 @@ Route::get('/foo', function () {
         ]);
 });
 
-Route::get('/bar', function () {
-    return response()
-        ->json([
-            'bar' => 'foo',
-        ]);
+Route::post('/github-webhook', function (Request $request) {
+    if($request->all()['action'] !== 'created'){
+        return ;
+    }
+    \App\Actions\ChangeFileWithGhComment::run($request->all()['comment']);
+    //GetOriginalFile::run($request->all()['comment']);
 });

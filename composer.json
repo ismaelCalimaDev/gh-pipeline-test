@@ -11,7 +11,8 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "lorisleiva/laravel-actions": "^2.5"
+        "lorisleiva/laravel-actions": "^2.5",
+        "openai-php/client": "^0.5.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

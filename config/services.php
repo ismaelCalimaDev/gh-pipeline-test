@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'gh_token' => env('GH_TOKEN'),
+
+    'openai_token' => env('OPENAI_TOKEN'),
+
 ];
