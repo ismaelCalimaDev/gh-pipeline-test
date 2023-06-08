@@ -43,7 +43,6 @@ class PushChangesToGithub
                 'force' => false,
             ],
         ]);
-        dd($pushResponse);
     }
 
     public function getTree($repository, $branch, $filePath, $owner, $newContent)
