@@ -2,31 +2,34 @@
 
 namespace App\Actions;
 
+use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class ChangeFileWithGhComment
 {
     use AsAction;
 
-    public string $commandSignature = 'gh:change-file';
+    public string $commandSignature = 'gh:change-file {commentContent} {filePath} {lineNumber} {repository} {owner} {branch}';
 
-    //todo: needs to recieve comment
-    public function handle()
+    public function handle($commentContent, $filePath, $lineNumber, $repository, $owner, $branch)
     {
-        /*$commentContent = $comment['body'];
-        $filePath = $comment['path'];
-        $lineNumber = $comment['line'];*/
-
-        $commentContent = 'cambiando la ruta "/" por "/home';
-        $filePath = 'routes/web.php';
-        $lineNumber = 20;
-        $repository = 'gh-pipeline-test';
-        $branch = 'master';
-        $owner = 'ismaelCalimaDev';
-
         $originalFileFormatted = GetOriginalFile::run($filePath, $lineNumber);
         $openAiResponseFormatted = SendRequestToOpenAi::run($originalFileFormatted, $commentContent);
         $newContent = ModifyFile::run($filePath, $openAiResponseFormatted);
         PushChangesToGithub::run($repository, $branch, $filePath, $owner, $newContent);
+    }
+
+    public function asCommand(Command $command): void
+    {
+        $this->handle(
+            $command->argument('commentContent'),
+            $command->argument('filePath'),
+            $command->argument('lineNumber'),
+            $command->argument('repository'),
+            $command->argument('owner'),
+            $command->argument('branch'),
+        );
+
+        $command->info('Done!');
     }
 }
