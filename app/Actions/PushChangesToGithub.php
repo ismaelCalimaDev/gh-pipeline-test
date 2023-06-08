@@ -43,8 +43,8 @@ class PushChangesToGithub
         $pushResponse = $client->patch("/repos/{$owner}/{$repository}/git/refs/heads/{$branch}", [
             'json' => [
                 'sha' => $commitSHA,
-                'force' => true
-            ]
+                'force' => true,
+            ],
         ]);
         dd($pushResponse);
     }
