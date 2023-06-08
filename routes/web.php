@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //tigo el mentiras
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('welcome');
 });
+Route::post('/formulario', 'guardarDatos');
