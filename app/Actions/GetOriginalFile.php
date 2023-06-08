@@ -14,6 +14,7 @@ class GetOriginalFile
     {
         $originalFile = file(base_path($filePath));
         array_splice($originalFile, $lineNumber - 1, 0);
+
         return json_encode($originalFile);
     }
 }

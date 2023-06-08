@@ -18,6 +18,7 @@ class ChangeFileWithGhComment
         $newContent = ModifyFile::run($filePath, $openAiResponseFormatted);
         PushChangesToGithub::run($repository, $branch, $filePath, $owner, $newContent);
     }
+
     public function asCommand(Command $command): void
     {
         $this->handle(
