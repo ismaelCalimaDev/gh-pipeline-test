@@ -37,7 +37,7 @@ class PushChangesToGithub
             'json' => [
                 'message' => $message,
                 'tree' => $treeSHA,
-                'parents' => $this->getCommitsSHA($owner, $repository)
+                'parents' => $this->getCommitsSHA($owner, $repository),
             ],
         ]);
 
@@ -46,8 +46,8 @@ class PushChangesToGithub
         $pushResponse = $client->patch("/repos/{$owner}/{$repository}/git/refs/heads/{$branch}", [
             'json' => [
                 'sha' => $commitSHA,
-                'force' => false
-            ]
+                'force' => false,
+            ],
         ]);
         dd($pushResponse);
     }
@@ -104,13 +104,14 @@ class PushChangesToGithub
         ]);
         $response = $client->get("https://api.github.com/repos/{$owner}/{$repo}/commits");
         $response = json_decode($response->getBody()->getContents(), true);
-        if (!empty($response) && is_array($response)) {
+        if (! empty($response) && is_array($response)) {
             $commits = array_slice($response, 0, 2);
 
             $parents = array_map(function ($commit) {
                 return $commit['sha'];
             }, $commits);
         }
+
         return $parents;
     }
 }
