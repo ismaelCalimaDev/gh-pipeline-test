@@ -17,7 +17,6 @@ class PushChangesToGithub
         $repository = 'gh-pipeline-test';
         $branch = 'master';
         $message = 'Test message for the commit :)';
-        $files = 'todo';
         $owner = 'ismaelCalimaDev';
         $filePath = 'routes/web.php';
 
@@ -32,14 +31,22 @@ class PushChangesToGithub
             ],
         ]);
 
-        $response = $client->post("repos/{$owner}/{$repository}/git/commits", [
+        $commitResponse = $client->post("repos/{$owner}/{$repository}/git/commits", [
             'json' => [
                 'message' => $message,
                 'tree' => $treeSHA,
             ],
         ]);
 
-        return dd($response->getBody()->getContents());
+        $commitSHA = json_decode($commitResponse->getBody()->getContents(), true)['sha'];
+
+        $pushResponse = $client->patch("/repos/{$owner}/{$repository}/git/refs/heads/{$branch}", [
+            'json' => [
+                'sha' => $commitSHA,
+                'force' => true
+            ]
+        ]);
+        dd($pushResponse);
     }
 
     public function getTree($repository, $branch, $filePath, $owner)

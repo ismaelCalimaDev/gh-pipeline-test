@@ -1,1 +1,18 @@
-PD9waHAKCnVzZSBJbGx1bWluYXRlXFN1cHBvcnRcRmFjYWRlc1xSb3V0ZTsKCi8qCnwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQp8IFdlYiBSb3V0ZXMKfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnwKfCBIZXJlIGlzIHdoZXJlIHlvdSBjYW4gcmVnaXN0ZXIgd2ViIHJvdXRlcyBmb3IgeW91ciBhcHBsaWNhdGlvbi4gVGhlc2UKfCByb3V0ZXMgYXJlIGxvYWRlZCBieSB0aGUgUm91dGVTZXJ2aWNlUHJvdmlkZXIgYW5kIGFsbCBvZiB0aGVtIHdpbGwKfCBiZSBhc3NpZ25lZCB0byB0aGUgIndlYiIgbWlkZGxld2FyZSBncm91cC4gTWFrZSBzb21ldGhpbmcgZ3JlYXQhCnwKKi8KLy90aWdvIGVsIG1lbnRpcmFzClJvdXRlOjpnZXQoJy8nLCBmdW5jdGlvbiAoKSB7CiAgICByZXR1cm4gdmlldygnd2VsY29tZScpOwp9KTsK
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+//tigo el mentiras
+Route::get('/', function () {
+    return view('welcome');
+});
