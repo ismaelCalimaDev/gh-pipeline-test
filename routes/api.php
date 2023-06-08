@@ -2,6 +2,7 @@
 
 use App\Actions\GetOriginalFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,12 @@ Route::post('/github-webhook', function (Request $request) {
     if ($request->all()['action'] !== 'created') {
         return;
     }
-    \App\Actions\ChangeFileWithGhComment::run($request->all()['comment']);
-    //GetOriginalFile::run($request->all()['comment']);
+    Artisan::call('gh:change-file', [
+        'commentContent' => $request->all()['comment']['body'],
+        'filePath' => $request->all()['comment']['path'],
+        'lineNumber' => $request->all()['comment']['line'],
+        'repository' => $request->all()['pull_request']['head']['repo']['name'],
+        'owner' => $request->all()['pull_request']['head']['repo']['owner']['login'],
+        'branch' => $request->all()['pull_request']['head']['ref'],
+    ]);
 });
