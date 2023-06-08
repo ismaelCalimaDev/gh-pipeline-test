@@ -11,18 +11,21 @@ class ChangeFileWithGhComment
     public string $commandSignature = 'gh:change-file';
 
     //todo: needs to recieve comment
-    public function handle()
+    public function handle($comment)
     {
         /*$commentContent = $comment['body'];
         $filePath = $comment['path'];
         $lineNumber = $comment['line'];*/
 
-        $commentContent = 'cambiando la ruta "/" por "/home';
-        $filePath = 'routes/web.php';
-        $lineNumber = 20;
+        $commentContent = $comment['body'];
+        $filePath = $comment['path'];
+        $lineNumber = $comment['line'];
         $repository = 'gh-pipeline-test';
         $branch = 'master';
         $owner = 'ismaelCalimaDev';
+
+        logger($commentContent, $filePath, $lineNumber, $repository, $branch, $owner);
+        dd($commentContent, $filePath, $lineNumber, $repository, $branch, $owner);
 
         $originalFileFormatted = GetOriginalFile::run($filePath, $lineNumber);
         $openAiResponseFormatted = SendRequestToOpenAi::run($originalFileFormatted, $commentContent);
