@@ -31,7 +31,7 @@ class PushChangesToGithub
             'json' => [
                 'message' => $message,
                 'tree' => $treeSHA,
-                'parents' => $this->getCommitsSHA($owner, $repository),
+                'parents' => $this->getCommitsSHA($owner, $repository, $branch),
             ],
         ]);
 
@@ -87,7 +87,7 @@ class PushChangesToGithub
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function getCommitsSHA($owner, $repo): array
+    public function getCommitsSHA($owner, $repo, $branch): array
     {
         $client = new Client([
             'base_uri' => 'https://api.github.com/',
@@ -96,7 +96,7 @@ class PushChangesToGithub
                 'Accept' => 'application/vnd.github.v3+json',
             ],
         ]);
-        $response = $client->get("https://api.github.com/repos/{$owner}/{$repo}/commits");
+        $response = $client->get("https://api.github.com/repos/{$owner}/{$repo}/commits?sha={$branch}");
         $response = json_decode($response->getBody()->getContents(), true);
         if (! empty($response) && is_array($response)) {
             $commits = array_slice($response, 0, 2);
