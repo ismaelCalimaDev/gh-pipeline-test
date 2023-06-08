@@ -20,9 +20,13 @@ class ChangeFileWithGhComment
         $commentContent = 'cambiando la ruta "/" por "/home';
         $filePath = 'routes/web.php';
         $lineNumber = 20;
+        $repository = 'gh-pipeline-test';
+        $branch = 'master';
+        $owner = 'ismaelCalimaDev';
 
         $originalFileFormatted = GetOriginalFile::run($filePath, $lineNumber);
         $openAiResponseFormatted = SendRequestToOpenAi::run($originalFileFormatted, $commentContent);
-        ModifyFile::run($filePath, $openAiResponseFormatted);
+        $newContent = ModifyFile::run($filePath, $openAiResponseFormatted);
+        PushChangesToGithub::run($repository, $branch, $filePath, $owner, $newContent);
     }
 }

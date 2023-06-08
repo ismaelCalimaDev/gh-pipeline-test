@@ -8,8 +8,8 @@ class ModifyFile
 {
     use AsAction;
 
-    public function handle(string $filePath, $file)
+    public function handle(string $filePath, $file): string
     {
-        file_put_contents($filePath, implode('', $file));
+        return implode('', $file);
     }
 }

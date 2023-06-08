@@ -12,18 +12,12 @@ class PushChangesToGithub
 
     public string $commandSignature = 'gh:push';
 
-    public function handle()
+    public function handle($repository, $branch, $filePath, $owner, $newContent)
     {
-        //todo: needs a huge refactor
-
-        $repository = 'gh-pipeline-test';
-        $branch = 'master';
         $message = 'Test message for the commit :)';
-        $owner = 'ismaelCalimaDev';
-        $filePath = 'routes/web.php';
 
         //$latestCommits = $this->getLatestCommit($repository, $branch, $owner);
-        $treeSHA = $this->getTree($repository, $branch, $filePath, $owner)['sha'];
+        $treeSHA = $this->getTree($repository, $branch, $filePath, $owner, $newContent)['sha'];
 
         $client = new Client([
             'base_uri' => 'https://api.github.com/',
@@ -52,7 +46,7 @@ class PushChangesToGithub
         dd($pushResponse);
     }
 
-    public function getTree($repository, $branch, $filePath, $owner)
+    public function getTree($repository, $branch, $filePath, $owner, $newContent)
     {
         $client = new Client([
             'base_uri' => 'https://api.github.com/',
@@ -69,7 +63,7 @@ class PushChangesToGithub
                     'path' => $filePath,
                     'mode' => '100644',
                     'type' => 'blob',
-                    'content' => 'hola que tal',
+                    'content' => $newContent,
                 ]],
             ],
         ]);
