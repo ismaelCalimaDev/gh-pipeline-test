@@ -38,12 +38,4 @@ Route::post('/github-webhook', function (Request $request) {
         $request->all()['pull_request']['head']['repo']['owner']['login'],
         $request->all()['pull_request']['head']['ref']
     );
-    /*Artisan::call('gh:change-file', [
-        'commentContent' => $request->all()['comment']['body'],
-        'filePath' => $request->all()['comment']['path'],
-        'lineNumber' => $request->all()['comment']['line'],
-        'repository' => $request->all()['pull_request']['head']['repo']['name'],
-        'owner' => $request->all()['pull_request']['head']['repo']['owner']['login'],
-        'branch' => $request->all()['pull_request']['head']['ref'],
-    ]);*/
 });
