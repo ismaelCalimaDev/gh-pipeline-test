@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return view('welcome');
 })->middleware('admin');
+middleware1: admin
+middleware2: admin
+middleware3: ud
+middleware4: admin
