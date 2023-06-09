@@ -35,6 +35,7 @@ Route::post('/github-webhook', function (Request $request) {
         $request->all()['comment']['line'],
         $request->all()['pull_request']['head']['repo']['name'],
         $request->all()['pull_request']['head']['repo']['owner']['login'],
-        $request->all()['pull_request']['head']['ref']
+        $request->all()['pull_request']['head']['ref'],
+        $request->all()['comment']['start_line'],
     );
 });
