@@ -10,11 +10,20 @@ class GetOriginalFile
 
     public string $commandSignature = 'gh:modify-file';
 
-    public function handle(string $filePath, int $lineNumber)
+    public function handle(string $filePath, int $lineNumber, int|null $startLine)
     {
+
+        //todo: check when no startLine
         $originalFile = file(base_path($filePath));
         array_splice($originalFile, $lineNumber - 1, 0);
 
-        return json_encode($originalFile);
+        $originalFileFormatted = [];
+        foreach ($originalFile as $line => $content) {
+            if($line >= ($startLine - 1) && $line <= ($lineNumber - 1)) {
+                $originalFileFormatted[] = $content;
+            }
+        }
+
+        return json_encode($originalFileFormatted);
     }
 }
