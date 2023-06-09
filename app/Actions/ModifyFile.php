@@ -12,6 +12,7 @@ class ModifyFile
     {
         $originalFile = file(base_path($filePath));
         array_splice($originalFile, $startLine - 1, $lineNumber - $startLine + 1, $file);
+
         return implode($originalFile);
     }
 }

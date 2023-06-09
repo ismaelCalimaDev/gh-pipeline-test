@@ -19,7 +19,7 @@ class GetOriginalFile
 
         $originalFileFormatted = [];
         foreach ($originalFile as $line => $content) {
-            if($line >= ($startLine - 1) && $line <= ($lineNumber - 1)) {
+            if ($line >= ($startLine - 1) && $line <= ($lineNumber - 1)) {
                 $originalFileFormatted[] = $content;
             }
         }
