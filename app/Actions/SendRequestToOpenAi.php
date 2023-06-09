@@ -11,7 +11,7 @@ class SendRequestToOpenAi
 
     public string $commandSignature = 'openai:send-request';
 
-    public function handle(string $originalFileFormatted, string $action): array
+    public function handle(string $originalFileFormatted, string $action): array|null
     {
         $content = 'Te paso un array con este formato: '.$originalFileFormatted.'. Esto simboliza un archivo php y quiero que devuelvas SOLO el mismo array: '.$action;
         $client = new Client();
