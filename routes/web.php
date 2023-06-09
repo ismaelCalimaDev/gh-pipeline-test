@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 //comentario a borrar
 Route::get('/welcome', function () {
     return view('dashboard');
-});
+})->middleware('auth');
