@@ -42,12 +42,14 @@ class SendRequestToOpenAi
                 ],
             ],
         ]);
+
         return json_decode($response->getBody()->getContents());
     }
 
     private function formatResponse($content)
     {
         preg_match("/\[(.*?)\]/", $content, $formattedResponse);
+
         return $formattedResponse;
     }
 }
