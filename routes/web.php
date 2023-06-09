@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/pablo', function () {
+Route::get('/dashboard', function () { //hello
     return view('welcome');
 })->middleware('admin');
