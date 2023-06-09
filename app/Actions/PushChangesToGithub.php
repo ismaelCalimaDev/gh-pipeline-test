@@ -8,6 +8,7 @@ use Lorisleiva\Actions\Concerns\AsAction;
 class PushChangesToGithub
 {
     use AsAction;
+
     public string $commandSignature = 'gh:push';
 
     public Client $client;
@@ -89,6 +90,7 @@ class PushChangesToGithub
                 'parents' => $commitParents,
             ],
         ]);
+
         return $response;
     }
 
