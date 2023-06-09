@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 //comentario a borrar
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
