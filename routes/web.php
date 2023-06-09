@@ -1,18 +1,1 @@
-<?php
-
-use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/pablo', function () {
-    return view('welcome');
-})->middleware('admin');
+["<?php\n","\n","use Illuminate\\Support\\Facades\\Route;\n","\n","\/*\n","|--------------------------------------------------------------------------\n","| Web Routes\n","|--------------------------------------------------------------------------\n","|\n","| Here is where you can register web routes for your application. These\n","| routes are loaded by the RouteServiceProvider and all of them will\n","| be assigned to the \"web\" middleware group. Make something great!\n","|\n","*\/\n","\n","Route::get('\/dashboard', function () {\n","    \/\/hello\n","   return view('welcome');\n","})->middleware('admin');\n","\n"]
