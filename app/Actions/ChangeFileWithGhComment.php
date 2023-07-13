@@ -16,7 +16,7 @@ class ChangeFileWithGhComment
         $originalFileFormatted = GetOriginalFile::run($filePath, $lineNumber, $startLine);
         $openAiResponseFormatted = SendRequestToOpenAi::run($originalFileFormatted, $commentContent);
         if ($openAiResponseFormatted === null || $openAiResponseFormatted === []) {
-            logger('Vacío');
+            /gen
 
             return;
         }
