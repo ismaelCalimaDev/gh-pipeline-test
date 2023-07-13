@@ -31,7 +31,7 @@ Route::post('/github-webhook', function (Request $request) {
     }
     if (explode(' ', $request->all()['comment']['body'])[0] !== '/gen') {
 
-        logger('hello');
+        
 
         return;
     }
