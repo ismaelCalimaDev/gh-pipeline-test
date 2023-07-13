@@ -32,6 +32,7 @@ Route::post('/github-webhook', function (Request $request) {
     if (explode(' ', $request->all()['comment']['body'])[0] !== '/gen') {
 
         return;
+        logger('Hello');
     }
     \App\Actions\ChangeFileWithGhComment::run(
         $request->all()['comment']['body'],
