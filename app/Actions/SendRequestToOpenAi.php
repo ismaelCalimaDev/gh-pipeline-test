@@ -11,11 +11,22 @@ class SendRequestToOpenAi
 
     public string $commandSignature = 'openai:send-request';
 
-    public function handle(string $originalFileFormatted, string $action): array
+    public function handle(string $originalFileFormatted, string $action): array|null
     {
-        $content = 'Te paso un array con este formato: '.$originalFileFormatted.'. Esto simboliza un archivo php y quiero que devuelvas SOLO el mismo array: '.$action;
-        $client = new Client();
+        $prompt = 'I am giving to you an array with this format: '.$originalFileFormatted.'. Each /n means a new line in the file and I want you give me back the same format but: '.$action;
+        $response = $this->makeOpenAIRequest($prompt);
+        $formattedResponse = $this->formatResponse($response->choices[0]->message->content);
 
+        if (! array_key_exists(0, $formattedResponse)) {
+            return [];
+        }
+
+        return json_decode($formattedResponse[0]);
+    }
+
+    private function makeOpenAIRequest(string $prompt)
+    {
+        $client = new Client();
         $response = $client->request('POST', 'https://api.openai.com/v1/chat/completions', [
             'headers' => [
                 'Authorization' => 'Bearer '.config('services.openai_token'),
@@ -26,19 +37,19 @@ class SendRequestToOpenAi
                 'messages' => [
                     [
                         'role' => 'user',
-                        'content' => $content,
+                        'content' => $prompt,
                     ],
                 ],
             ],
         ]);
-        $result = json_decode($response->getBody()->getContents());
-        $allResponse = $result->choices[0]->message->content;
-        preg_match("/\[(.*?)\]/", $allResponse, $realResponse);
 
-        if (! array_key_exists(0, $realResponse)) {
-            return [];
-        }
+        return json_decode($response->getBody()->getContents());
+    }
 
-        return json_decode($realResponse[0]);
+    private function formatResponse($content)
+    {
+        preg_match("/\[(.*?)\]/", $content, $formattedResponse);
+
+        return $formattedResponse;
     }
 }

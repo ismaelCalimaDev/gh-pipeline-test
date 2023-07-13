@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,12 +29,18 @@ Route::post('/github-webhook', function (Request $request) {
     if ($request->all()['action'] !== 'created') {
         return;
     }
-    Artisan::call('gh:change-file', [
-        'commentContent' => $request->all()['comment']['body'],
-        'filePath' => $request->all()['comment']['path'],
-        'lineNumber' => $request->all()['comment']['line'],
-        'repository' => $request->all()['pull_request']['head']['repo']['name'],
-        'owner' => $request->all()['pull_request']['head']['repo']['owner']['login'],
-        'branch' => $request->all()['pull_request']['head']['ref'],
-    ]);
+    if (explode(' ', $request->all()['comment']['body'])[0] !== '/gen') {
+        logger('hello');
+
+        return;
+    }
+    \App\Actions\ChangeFileWithGhComment::run(
+        $request->all()['comment']['body'],
+        $request->all()['comment']['path'],
+        $request->all()['comment']['line'],
+        $request->all()['pull_request']['head']['repo']['name'],
+        $request->all()['pull_request']['head']['repo']['owner']['login'],
+        $request->all()['pull_request']['head']['ref'],
+        $request->all()['comment']['start_line'],
+    );
 });

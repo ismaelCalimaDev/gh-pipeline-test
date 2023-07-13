@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//comentario a borrar
-Route::get('/home', function () {
-    return view('welcome');
-});
+Route::get('/pablo', function () {
+    return view('isma');
+})->middleware('auth');
