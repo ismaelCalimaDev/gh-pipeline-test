@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/pablo', function () {
-    return view('saulo');
+    return view('isma');
 })->middleware('auth');
