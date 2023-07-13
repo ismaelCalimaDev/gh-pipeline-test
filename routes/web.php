@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/pablo', function () {    return view('auth');})->middleware('isma');
+Route::get('/pablo', function () {
+    return view('auth');
+})->middleware('isma');
